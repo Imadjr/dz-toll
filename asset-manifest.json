@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/dz-toll/static/css/main.825e5f64.css",
-    "main.js": "/dz-toll/static/js/main.645e2c5a.js",
+    "main.css": "/dz-toll/static/css/main.e987e408.css",
+    "main.js": "/dz-toll/static/js/main.080968fe.js",
     "index.html": "/dz-toll/index.html",
-    "main.825e5f64.css.map": "/dz-toll/static/css/main.825e5f64.css.map",
-    "main.645e2c5a.js.map": "/dz-toll/static/js/main.645e2c5a.js.map"
+    "main.e987e408.css.map": "/dz-toll/static/css/main.e987e408.css.map",
+    "main.080968fe.js.map": "/dz-toll/static/js/main.080968fe.js.map"
   },
   "entrypoints": [
-    "static/css/main.825e5f64.css",
-    "static/js/main.645e2c5a.js"
+    "static/css/main.e987e408.css",
+    "static/js/main.080968fe.js"
   ]
 }
