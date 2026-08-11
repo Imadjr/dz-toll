@@ -1,0 +1,13 @@
+{
+  "tollFee": 50,
+  "lowBalanceThreshold": 100,
+  "systemName": "DzToll",
+  "enableNotifications": true,
+  "autoRechargeEnabled": false,
+  "maxRechargeAmount": 5000,
+  "minBalanceAlert": 50,
+  "sessionTimeout": 30,
+  "enableEmailAlerts": true,
+  "enableSMSAlerts": false,
+  "maintenanceMode": false
+}

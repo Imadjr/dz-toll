@@ -1,0 +1,397 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   CSS VARIABLES: BRAND + THEMING
+   ============================================================ */
+:root {
+  --brand-50: #f0fdf4;
+  --brand-100: #dcfce7;
+  --brand-200: #bbf7d0;
+  --brand-500: #22c55e;
+  --brand-600: #16a34a;
+  --indigo-600: #4f46e5;
+  --purple-600: #7c3aed;
+  --text-900: #0f172a;
+  --text-700: #334155;
+  --text-600: #475569;
+  --ring-focus: #4f46e5; /* indigo-600 */
+}
+
+/* ============================================================
+   GLOBAL RESET & BASE STYLES
+   ============================================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Soft gradient baseline that complements glass UI */
+  background: radial-gradient(1200px 600px at 10% -10%, rgba(34, 197, 94, 0.12), transparent 60%),
+    radial-gradient(900px 500px at 100% 120%, rgba(79, 70, 229, 0.08), transparent 60%),
+    linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  color: var(--text-900);
+  line-height: 1.5;
+}
+
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+    'Courier New', monospace;
+}
+
+/* ============================================================
+   CUSTOM SCROLLBAR
+   ============================================================ */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #94a3b8 #f1f5f9;
+}
+
+/* ============================================================
+   ACCESSIBILITY UTILITIES
+   ============================================================ */
+.sr-only {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Focus styles for native controls; Tailwind focus-visible utilities still apply */
+input:focus,
+textarea:focus,
+select:focus,
+button:focus,
+a:focus {
+  outline: 2px solid var(--ring-focus);
+  outline-offset: 2px;
+}
+
+/* Hide focus outlines when using mouse but keep for keyboard (progressive enhancement) */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ============================================================
+   ANIMATIONS (with reduced motion safety)
+   ============================================================ */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulseSoft {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-spin,
+  .animate-fade-in,
+  .animate-slide-in,
+  .animate-pulse,
+  .ping-soft {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+.animate-fade-in {
+  animation: fadeIn 0.28s ease-out both;
+}
+.animate-slide-in {
+  animation: slideIn 0.28s ease-out both;
+}
+.animate-pulse {
+  animation: pulseSoft 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Soft ping for splash badges or status dots */
+.ping-soft {
+  position: relative;
+}
+.ping-soft::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 9999px;
+  background: rgba(34, 197, 94, 0.15);
+  animation: pingSoft 1.6s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+@keyframes pingSoft {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  70% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+}
+
+/* ============================================================
+   TRANSITIONS & EFFECTS
+   ============================================================ */
+.transition-all {
+  transition: all 0.25s ease;
+}
+
+.card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
+  background-color: rgba(255, 255, 255, 0.75);
+}
+
+/* Glass utility for containers (used by nav/sidebars) */
+.glass {
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: saturate(140%) blur(12px);
+  -webkit-backdrop-filter: saturate(140%) blur(12px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+/* Gradient brand stripes (optional utility) */
+.brand-gradient {
+  background-image: linear-gradient(90deg, var(--indigo-600), var(--purple-600));
+}
+.brand-gradient-green {
+  background-image: linear-gradient(90deg, var(--brand-600), #0ea5e9);
+}
+
+/* Elevation helpers */
+.elev-1 {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+}
+.elev-2 {
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* ============================================================
+   LOADING SPINNER
+   ============================================================ */
+.spinner {
+  border: 3px solid rgba(79, 70, 229, 0.15); /* indigo-600 @ 15% */
+  border-top: 3px solid var(--indigo-600);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 0.9s linear infinite;
+  margin-inline: auto;
+}
+
+/* ============================================================
+   SELECTION STYLES
+   ============================================================ */
+::selection {
+  background-color: rgba(79, 70, 229, 0.18); /* indigo-600 */
+  color: inherit;
+}
+::-moz-selection {
+  background-color: rgba(79, 70, 229, 0.18);
+  color: inherit;
+}
+
+/* ============================================================
+   IMAGE OPTIMIZATION
+   ============================================================ */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Prevent image dragging ghost */
+img,
+svg {
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* ============================================================
+   RESPONSIVE TWEAKS
+   ============================================================ */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+  .mobile-full {
+    width: 100% !important;
+  }
+  .hide-mobile {
+    display: none !important;
+  }
+}
+
+/* ============================================================
+   PRINT STYLES
+   ============================================================ */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #ffffff;
+  }
+}
+
+/* ============================================================
+   COMPONENT-ORIENTED HELPERS
+   ============================================================ */
+/* Status dots used across headers */
+.status-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+}
+.status-live {
+  background-color: #22c55e;
+} /* green-500 */
+.status-off {
+  background-color: #ef4444;
+} /* red-500 */
+
+/* Badge */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1rem;
+}
+
+/* Focus ring utility for custom controls */
+.ring-focus {
+  outline: 2px solid var(--ring-focus);
+  outline-offset: 2px;
+}
+
+/* Truncate middle for long IDs like RFID (visual, not semantic) */
+.truncate-middle {
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Table smoothing */
+.table-row-hover tr:hover {
+  background-color: #f8fafc;
+}
+
+/* Modal backdrop helper (for non-TW usage) */
+.backdrop-blur-soft {
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+/* Buttons minimal reset for consistency when not using TW utilities */
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Ensure consistent number alignment for balances */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Compact utility for action icons */
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  padding: 0.375rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.icon-btn:hover {
+  background-color: #f1f5f9;
+}
+
+/* End of enhanced index.css */

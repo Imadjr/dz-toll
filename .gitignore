@@ -1,0 +1,71 @@
+# Local quarantine created during repository preparation
+.private/
+
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+env/
+
+# Node / React
+node_modules/
+frontend/build/
+frontend/static/
+coverage/
+.npm/
+.eslintcache
+
+# Runtime data and private records
+backend/users.csv
+backend/toll_log.csv
+backend/snapshots/
+backend/logs/
+backend/backups/
+*.log
+
+# Preserve public-safe CSV templates
+!backend/users.example.csv
+!backend/toll_log.example.csv
+
+# Generated model outputs; retain the selected runtime weight
+*.pt
+!models/license_plate/best.pt
+runs/
+
+# Raw source media is kept outside the public Git candidate
+Photos/
+Videos/
+Presentation/
+*.mp4
+
+# Editors and operating systems
+.DS_Store
+**/.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.orig
+*.pid
